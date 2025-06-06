@@ -1,0 +1,31 @@
+h2 {
+  font-size: 2rem;
+  margin-bottom: 2%;
+  text-align: center;
+}
+
+p {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 5%;
+}
+
+.boton {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  padding: 3% 6%;
+  border-radius: 5%;
+  display: block;
+  font-size: 100%;
+  width: 60%;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+  background-color: #2f5d43;
+}

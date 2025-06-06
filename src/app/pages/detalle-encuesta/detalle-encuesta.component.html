@@ -1,0 +1,8 @@
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngIf="encuesta">
+  <h2>{{ encuesta.nombre }}</h2>
+  <p><strong>Fecha de vencimiento:</strong> {{ encuesta.fecha_vencimiento }}</p>
+  <p><strong>Email:</strong> {{ encuesta.email }}</p>
+  <p><strong>Código único:</strong> {{ encuesta.codigo_unico }}</p>
+</div>

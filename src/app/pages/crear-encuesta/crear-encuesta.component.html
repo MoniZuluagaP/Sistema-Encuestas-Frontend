@@ -1,0 +1,32 @@
+<form [formGroup]="encuestaForm" (ngSubmit)="crearEncuesta()">
+  <label>
+    Nombre:
+    <input formControlName="nombre" />
+  </label>
+  <div *ngIf="encuestaForm.get('nombre')?.invalid && encuestaForm.get('nombre')?.touched">
+    Nombre es requerido.
+  </div>
+
+  <label>
+    Fecha de vencimiento:
+    <input type="date" formControlName="fecha_vencimiento" />
+  </label>
+  <div *ngIf="encuestaForm.get('fecha_vencimiento')?.invalid && encuestaForm.get('fecha_vencimiento')?.touched">
+    Fecha de vencimiento es requerida.
+  </div>
+
+  <label>
+    Email:
+    <input type="email" formControlName="email" />
+  </label>
+  <div *ngIf="encuestaForm.get('email')?.invalid && encuestaForm.get('email')?.touched">
+    Email inválido.
+  </div>
+
+  <button type="submit" [disabled]="encuestaForm.invalid">Crear Encuesta</button>
+</form>
+
+<div *ngIf="resultado">
+  <h3>Encuesta creada:</h3>
+  <pre>{{ resultado | json }}</pre>
+</div>

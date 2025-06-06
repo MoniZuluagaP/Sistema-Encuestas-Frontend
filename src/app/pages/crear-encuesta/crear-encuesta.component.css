@@ -1,0 +1,23 @@
+/* Contenedor principal */
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+/* Estilos para los inputs */
+.input {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 10px;
+}
+
+/* Estilos para cada sección/pregunta */
+.section {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 6px;
+}

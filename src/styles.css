@@ -1,0 +1,114 @@
+:root {
+  --color-primario: #2c6e49;      /* verde oscuro */
+  --color-secundario: #e6f0ea;    /* verde muy claro */
+  --color-acento: #f2a365;         /* naranja suave para detalles */
+  --color-texto: #3e4c4a;         /* gris verdoso oscuro */
+  --color-blanco: #ffffff;
+  --color-fondo: #f9faf9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+header {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: 0 2px 6px rgba(44, 110, 73, 0.4);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+nav a {
+  color: var(--color-primario);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: var(--color-acento);
+  color: var(--color-blanco);
+  text-decoration: none;
+}
+
+main {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 2rem auto;
+  background-color: var(--color-secundario);
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(46, 60, 55, 0.1);
+}
+
+h2 {
+  color: var(--color-primario);
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1.25rem;
+}
+
+/* Botones (ejemplo) */
+.boton {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.boton:hover {
+  background-color: var(--color-acento);
+  color: var(--color-blanco);
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  nav {
+    justify-content: flex-start;
+    gap: 0.75rem;
+  }
+
+  main {
+    padding: 1rem;
+    margin: 1rem;
+  }
+}
