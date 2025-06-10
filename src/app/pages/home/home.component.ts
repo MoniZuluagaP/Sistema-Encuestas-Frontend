@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  template: `
-    <h2>Bienvenido a Encuestalandia</h2>
-    <p>Tu sistema de encuestas anónimas.</p>
-    <a routerLink="/crear-encuesta" class="boton">Crear una nueva encuesta</a>
-  `
+  imports: [RouterModule],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
 })
 export class HomeComponent {}

@@ -1,0 +1,37 @@
+<form [formGroup]="preguntaForm" (ngSubmit)="pregunta ? actualizarPregunta() : crearPregunta()">
+  <label>
+    Número:
+    <input formControlName="numero" type="number" min="1"/>
+  </label>
+  <div *ngIf="preguntaForm.get('numero')?.invalid && preguntaForm.get('numero')?.touched">
+    Número es requerido.
+  </div>
+
+  <label>
+    Texto:
+    <input formControlName="texto" />
+  </label>
+  <div *ngIf="preguntaForm.get('texto')?.invalid && preguntaForm.get('texto')?.touched">
+    Texto es requerida.
+  </div>
+
+  <label>
+    Tipo:
+    <select formControlName="tipo">
+      <option *ngFor="let tipo of tipos" [value]="tipo.value">{{ tipo.label }}</option>
+    </select>
+  </label>
+  <div *ngIf="preguntaForm.get('tipo')?.invalid && preguntaForm.get('tipo')?.touched">
+    Tipo inválido.
+  </div>
+
+  <button type="submit" style="margin-left: 10px; margin-right: 10px;">{{ pregunta ? "Guardar" : "Crear Pregunta"}}</button>
+  <button type="button" *ngIf="pregunta" (click)="cancelar()">Cancelar</button>
+
+  <app-formulario-opciones
+    *ngIf="preguntaForm.get('tipo')?.value === 'OPCION_MULTIPLE_SELECCION_SIMPLE' || preguntaForm.get('tipo')?.value === 'OPCION_MULTIPLE_SELECCION_MULTIPLE'"
+    [opcionesForm]="opcionesForm"
+    [opcionesActuales]="pregunta ? pregunta.opciones : undefined"
+  >
+  </app-formulario-opciones>
+</form>

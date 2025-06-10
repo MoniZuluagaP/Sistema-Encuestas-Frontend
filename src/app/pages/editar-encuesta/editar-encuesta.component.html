@@ -1,1 +1,61 @@
-<p>editar-encuesta works!</p>
+<h3>Encuesta</h3>
+
+<div class="info" *ngIf="!editarEncuesta">
+  <div class="info-item">
+    <button (click)="clickEnEditar()">Editar</button>
+    <button (click)="activarDesactivarEncuesta()">{{ encuesta?.activa ? "Desactivar" : "Activar" }}</button>
+  </div>
+
+  <div>
+    <div class="info">
+      <div class="info-item">
+        <strong>Nombre</strong>
+        <span>{{ encuesta?.nombre }}</span>
+      </div>
+      <div class="info-item">
+        <strong>Fecha de vencimiento</strong>
+        <span>{{ encuesta?.fecha_vencimiento }}</span>
+      </div>
+      <div class="info-item">
+        <strong>Activa</strong>
+        <span>{{ encuesta?.activa }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<form *ngIf="editarEncuesta" [formGroup]="encuestaForm" (ngSubmit)="actualizarEncuesta()" style="margin-top: 10px; margin-bottom: 10px;">
+  <label>
+    Nombre:
+    <input formControlName="nombre" />
+  </label>
+  <div *ngIf="encuestaForm.get('nombre')?.invalid && encuestaForm.get('nombre')?.touched">
+    Nombre es requerido.
+  </div>
+
+  <label>
+    Fecha de vencimiento:
+    <input type="date" formControlName="fecha_vencimiento" />
+  </label>
+  <div *ngIf="encuestaForm.get('fecha_vencimiento')?.invalid && encuestaForm.get('fecha_vencimiento')?.touched">
+    Fecha de vencimiento es requerida.
+  </div>
+
+  <button type="submit" [disabled]="encuestaForm.invalid" style="margin-left: 10px; margin-right: 10px;">Actualizar Encuesta</button>
+</form>
+
+<h3 style="margin-bottom: 20px;">Preguntas</h3>
+
+<app-pregunta
+  *ngFor="let pregunta of preguntas"
+  (preguntaActualizada)="actualizarPregunta($event)"
+  (preguntaEliminada)="eliminarPregunta($event)"
+  [pregunta]="pregunta">
+</app-pregunta>
+
+<div class="formulario-pregunta" style="margin-top: 20px;" *ngIf="encuesta && encuesta.id">
+  <h4>Nueva Pregunta</h4>
+  <app-formulario-pregunta [encuestaId]="encuesta.id" (preguntaCreada)="agregarPregunta($event)">
+  </app-formulario-pregunta>
+</div>

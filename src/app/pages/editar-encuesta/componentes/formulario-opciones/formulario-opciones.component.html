@@ -1,0 +1,18 @@
+<br>
+
+<span>Opciones:</span>
+
+<div [formGroup]="opcionesForm">
+
+  <div formArrayName="opciones">
+    <div *ngFor="let opcion of opciones.controls; let i = index">
+      <input [formControlName]="i" placeholder="Escribe una opción..." />
+      <button type="button" style="margin-left: 10px;" (click)="eliminarOpcion(i)">Eliminar</button>
+      <button *ngIf="opcionesActuales && opcionesActuales.length > 0 && i <= opcionesActuales.length - 1" type="button" style="margin-left: 10px;" (click)="actualizarOpcion(i)">Actualizar</button>
+    </div>
+  </div>
+
+  <button type="button" (click)="agregarOpcion()">Agregar opción</button>
+
+  <br />
+</div>

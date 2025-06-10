@@ -1,0 +1,42 @@
+<div class="info" *ngIf="!editarPregunta">
+  <div class="info-item">
+    <button (click)="clickEnEditar()">Editar</button>
+    <button (click)="clickEliminar()">Eliminar</button>
+  </div>
+
+  <div>
+    <div class="info">
+      <div class="info-item">
+        <strong>Número</strong>
+        <span>{{ pregunta.numero }}</span>
+      </div>
+
+      <div class="info-item">
+        <strong>Texto</strong>
+        <span>{{ pregunta.texto }}</span>
+      </div>
+
+      <div class="info-item">
+        <strong>Tipo</strong>
+        <span>{{ pregunta.tipo }}</span>
+      </div>
+    </div>
+
+    <div class="opciones" *ngIf="pregunta.tipo != 'ABIERTA'">
+      <strong>Opciones</strong>
+      <div *ngFor="let opcion of pregunta.opciones">
+        <span>{{ opcion.texto }}</span>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-formulario-pregunta
+  *ngIf="editarPregunta"
+  [pregunta]="pregunta"
+  (preguntaCreada)="actualizarPregunta($event)"
+  (cancelarModificar)="cancelarModificar()"
+></app-formulario-pregunta>
+
+<hr style="margin-top: 10px; margin-bottom: 10px" />
