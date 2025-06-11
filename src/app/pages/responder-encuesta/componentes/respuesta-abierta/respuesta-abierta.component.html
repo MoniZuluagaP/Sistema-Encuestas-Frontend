@@ -1,0 +1,9 @@
+<form [formGroup]="respuestaForm" (ngSubmit)="guardarRespuesta()">
+  <label>
+    {{ pregunta.texto }}
+    <input formControlName="texto" />
+  </label>
+
+  <button (click)="clickEnAnteriorPregunta()" *ngIf="preguntaIndex > 0">Anterior</button>
+  <button type="submit">Siguiente</button>
+</form>

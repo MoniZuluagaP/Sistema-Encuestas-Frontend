@@ -1,1 +1,40 @@
-<p>responder-encuesta works!</p>
+<div *ngIf="!encuestaIniciada">
+  <h3>{{ encuesta?.nombre }}</h3>
+  <button (click)="comenzarEncuesta()">Comenzar</button>
+</div>
+
+<div *ngIf="encuestaIniciada && preguntaActiva && respuesta">
+  <app-respuesta-abierta
+    *ngIf="preguntaActiva.tipo === 'ABIERTA'"
+    [pregunta]="preguntaActiva"
+    [respuestaId]="respuesta.id"
+    [preguntaIndex]="preguntaActivaIndex"
+    (anteriorPregunta)="anteriorPregunta()"
+    (siguientePregunta)="siguientePregunta()"
+    >
+  </app-respuesta-abierta>
+
+  <app-respuesta-opcion-simple
+    *ngIf="preguntaActiva.tipo === 'OPCION_MULTIPLE_SELECCION_SIMPLE'"
+    [pregunta]="preguntaActiva"
+    [respuestaId]="respuesta.id"
+    [preguntaIndex]="preguntaActivaIndex"
+    (anteriorPregunta)="anteriorPregunta()"
+    (siguientePregunta)="siguientePregunta()"
+    >
+  </app-respuesta-opcion-simple>
+
+  <app-respuesta-opcion-multiple
+    *ngIf="preguntaActiva.tipo === 'OPCION_MULTIPLE_SELECCION_MULTIPLE'"
+    [pregunta]="preguntaActiva"
+    [respuestaId]="respuesta.id"
+    [preguntaIndex]="preguntaActivaIndex"
+    (anteriorPregunta)="anteriorPregunta()"
+    (siguientePregunta)="siguientePregunta()"
+    >
+  </app-respuesta-opcion-multiple>
+</div>
+
+<div *ngIf="encuestaIniciada && !preguntaActiva">
+  <p>Muchas gracias por participar</p>
+</div>

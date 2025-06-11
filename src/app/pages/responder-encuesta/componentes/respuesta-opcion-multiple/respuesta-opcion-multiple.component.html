@@ -1,0 +1,18 @@
+<form [formGroup]="respuestaForm" (ngSubmit)="guardarRespuesta()">
+  <div>
+    <p>{{ pregunta.texto }}</p>
+
+    <div *ngFor="let opcion of pregunta.opciones; let i = index">
+      <label>
+        <input
+          type="checkbox"
+          [formControl]="opcionFormArray.controls[i]"
+        />
+        {{ opcion.texto }}
+      </label>
+    </div>
+  </div>
+
+  <button (click)="clickEnAnteriorPregunta()" *ngIf="preguntaIndex > 0">Anterior</button>
+  <button type="submit">Siguiente</button>
+</form>

@@ -1,0 +1,19 @@
+<form [formGroup]="respuestaForm" (ngSubmit)="guardarRespuesta()">
+  <div>
+    <p>{{ pregunta.texto }}</p>
+
+    <div *ngFor="let opcion of pregunta.opciones">
+      <label>
+        <input
+          type="radio"
+          formControlName="opcionId"
+          [value]="opcion.id"
+        />
+        {{ opcion.texto }}
+      </label>
+    </div>
+  </div>
+
+  <button (click)="clickEnAnteriorPregunta()" *ngIf="preguntaIndex > 0">Anterior</button>
+  <button type="submit">Siguiente</button>
+</form>
