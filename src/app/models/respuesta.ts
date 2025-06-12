@@ -3,6 +3,7 @@ import { Encuesta } from "./encuesta";
 export interface Respuesta {
   id: number;
   encuesta: Encuesta;
+  texto?: string;
 }
 
 export interface RespuestaAbierta {

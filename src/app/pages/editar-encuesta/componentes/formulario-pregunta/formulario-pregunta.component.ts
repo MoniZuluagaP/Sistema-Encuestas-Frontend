@@ -91,6 +91,10 @@ export class FormularioPreguntaComponent implements AfterViewInit {
           
           this.preguntaCreada.emit({...this.pregunta, ...preguntaActualizada.data}); // Emite al padre
           this.preguntaForm.reset(); // Limpia formulario
+          
+          this.opcionesForm = this.fb.group({
+            opciones: this.fb.array([]),
+          });
         } catch (error) {
           console.error('Error al actualizar pregunta:', error);  // Log error
         }
@@ -144,6 +148,10 @@ export class FormularioPreguntaComponent implements AfterViewInit {
 
         this.preguntaCreada.emit(preguntaNueva); // Emite al padre
         this.preguntaForm.reset(); // Limpia formulario
+        
+        this.opcionesForm = this.fb.group({
+          opciones: this.fb.array([]),
+        });
 
       } catch (error) {
         console.error('Error al crear pregunta:', error);  // Log error

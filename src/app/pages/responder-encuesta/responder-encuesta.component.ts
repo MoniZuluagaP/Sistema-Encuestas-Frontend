@@ -24,6 +24,7 @@ export class ResponderEncuestaComponent implements OnInit {
 
   encuestaIniciada = false;
   preguntaActivaIndex = 0
+  errorEncuesta?: string;
 
   get preguntaActiva() {
     return this.preguntas ? this.preguntas[this.preguntaActivaIndex]: null
@@ -41,6 +42,7 @@ export class ResponderEncuestaComponent implements OnInit {
       console.log('Repuesta del backed:', { encuesta: this.encuesta })
     } catch (error) {
       console.error('Error al traer la encuesta', error)
+      this.errorEncuesta = (error as any).error.message;
     }
   }
 

@@ -1,1 +1,70 @@
-<p>ver-resultados works!</p>
+<div *ngIf="encuesta">
+  <h3>{{ encuesta.nombre }}</h3>
+  <br />
+  <div>
+    <span>Estado: {{ encuesta.activa ? "Activa" : "Inactiva" }}</span>
+    <br />
+    <span>Fecha de vencimiento: {{ encuesta.fecha_vencimiento }}</span>
+  </div>
+  <br />
+
+  <h4>Controles</h4>
+  <br />
+  <div>
+    <span style="margin-right: 10px">Cambiar estado de la encuesta:</span>
+    <button (click)="activarODesactivarEncuesta()">
+      {{ encuesta.activa ? "Desactivar" : "Activar" }}
+    </button>
+  </div>
+  <form [formGroup]="vencimientoForm" (ngSubmit)="cambiarFechaDeVencimiento()">
+    <label>
+      Cambiar fecha de vencimiento:
+      <input type="date" formControlName="fecha_vencimiento" />
+    </label>
+    <div
+      *ngIf="
+        vencimientoForm.get('fecha_vencimiento')?.invalid &&
+        vencimientoForm.get('fecha_vencimiento')?.touched
+      "
+    >
+      Fecha de vencimiento es requerida.
+    </div>
+    <button type="submit" style="margin-left: 10px">Cambiar</button>
+  </form>
+  <br />
+
+  <div *ngIf="encuestaConRespuestas" style="margin-bottom: 30px;">
+    <h4>Exportar datos</h4>
+    <br />
+    <button style="margin-left: 10px" (click)="exportarResultados()">Exportar resultados en pdf</button>
+    <button style="margin-left: 10px" (click)="exportarEstadisticas()">Exportar estadisticas en pdf</button>
+  </div>
+
+  <h4>Resultados</h4>
+  <br />
+  <div *ngIf="encuestaConRespuestas">
+    <div *ngFor="let pregunta of encuesta.preguntas">
+      <h4>{{ pregunta.texto }}</h4>
+      <br />
+      <div *ngFor="let respuesta of pregunta.respuestas; let index = index">
+        <span>Respuesta # {{ index + 1 }}</span>
+        <div
+          *ngIf="
+            pregunta.tipo === 'ABIERTA' ||
+            pregunta.tipo === 'OPCION_MULTIPLE_SELECCION_SIMPLE'
+          "
+        >
+          {{ respuesta.texto }}
+        </div>
+        <div *ngIf="pregunta.tipo === 'OPCION_MULTIPLE_SELECCION_MULTIPLE'">
+          {{ respuesta }}
+        </div>
+        <hr style="margin-top: 5px; margin-bottom: 5px" />
+      </div>
+      <br />
+    </div>
+  </div>
+  <span *ngIf="!encuestaConRespuestas"
+    >Esta encuesta aún no tiene respuestas</span
+  >
+</div>

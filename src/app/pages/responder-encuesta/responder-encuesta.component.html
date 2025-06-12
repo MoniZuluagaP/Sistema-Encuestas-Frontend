@@ -1,9 +1,9 @@
-<div *ngIf="!encuestaIniciada">
-  <h3>{{ encuesta?.nombre }}</h3>
+<div *ngIf="encuesta && encuesta.activa && !encuestaIniciada">
+  <h3>{{ encuesta.nombre }}</h3>
   <button (click)="comenzarEncuesta()">Comenzar</button>
 </div>
 
-<div *ngIf="encuestaIniciada && preguntaActiva && respuesta">
+<div *ngIf="encuesta && encuesta.activa && encuestaIniciada && preguntaActiva && respuesta">
   <app-respuesta-abierta
     *ngIf="preguntaActiva.tipo === 'ABIERTA'"
     [pregunta]="preguntaActiva"
@@ -35,6 +35,10 @@
   </app-respuesta-opcion-multiple>
 </div>
 
-<div *ngIf="encuestaIniciada && !preguntaActiva">
+<div *ngIf="encuesta && encuesta.activa && encuestaIniciada && !preguntaActiva">
   <p>Muchas gracias por participar</p>
+</div>
+
+<div *ngIf="errorEncuesta">
+  <p>{{ errorEncuesta }}</p>
 </div>

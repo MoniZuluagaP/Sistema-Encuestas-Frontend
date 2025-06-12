@@ -22,6 +22,8 @@ export class EditarEncuestaComponent implements OnInit {
   codigo: string;
   editarEncuesta = false
 
+  encuestaConRespuestas = false;
+
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute) {
     this.codigo = this.route.snapshot.paramMap.get('codigo')!;
 
@@ -34,6 +36,13 @@ export class EditarEncuestaComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     try {
       this.encuesta = (await firstValueFrom(this.http.get(`http://localhost:3000/encuesta/${this.codigo}`))) as Encuesta
+
+      this.encuestaConRespuestas =  this.encuesta.preguntas.some(pregunta => pregunta.respuestas && pregunta.respuestas.length > 0);
+
+      if (this.encuestaConRespuestas) {
+        return;
+      }
+
       this.preguntas = this.encuesta.preguntas.sort((a, b) => a.numero > b.numero ? 1 : -1);
 
       const fecha = new Date(this.encuesta?.fecha_vencimiento);

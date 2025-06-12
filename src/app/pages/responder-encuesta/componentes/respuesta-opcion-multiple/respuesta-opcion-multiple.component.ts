@@ -40,12 +40,10 @@ export class RespuestaOpcionMultipleComponent implements OnChanges, OnInit {
   }
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
-    console.log('PREGUNTAAAA', this.pregunta);
     this.respuestaForm = this.fb.group({});
   }
 
   ngOnInit(): void {
-    console.log('PREGUNTAAAA2', this.pregunta);
     this.respuestaForm = this.fb.group({
       opcionIds: this.fb.array(this.pregunta.opciones!.map(() => false)),
     });
@@ -92,6 +90,10 @@ export class RespuestaOpcionMultipleComponent implements OnChanges, OnInit {
           checked ? this.pregunta.opciones![i].id : null
         )
         .filter((v: number | null) => v !== null);
+
+      if (opcionIds.length === 0) {
+        throw new Error('Se requiere al menos una opcion')
+      }
 
       try {
         if (!this.respuestaGuardada) {
